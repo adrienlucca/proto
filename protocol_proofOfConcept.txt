@@ -1,0 +1,78 @@
+Light transformer v0.4
+
+Proof of concept:
+
+This "program" creates a bitmap file (wall.pbm) to print a wallpaper
+
+
+the series of operations needed to create this bitmap file is a mess right now, 
+as for today (Feb 4th, 2014) it's at the "functionnal" stage.
+
+To run it you need: 
+
+- an X-Rite MA68 II spectrocolorimeter 
+- a digital camera having a RAW mode
+- a software to remove optical / electronic artefacts from your pictures (vignetting, etc. - a hardware calibration solution might be better)
+- one or several stable artificial light sources
+- a spectrophotometer that can measure illuminants 
+- an inkjet color printer 
+- a uniform flat diffusor such as a wall, a board...
+- a dark room isolated from natural light
+- a tripod
+
+
+# 1 - building the color database
+
+- make an image such as the file "colors.ppm" or "cube.png", present in this folder:
+> these images contain 386 colors printed from 386 RGB combinations
+
+- make a file listing these color codes (i.e. "colornames.txt")
+> file structure is:   serial_number, R, G, B
+
+- print the file with a professionnal inkjet printer 
+> set the profile to a wide gamut like "Adobe 98" to make sure you "push" the limits of what this printer can do
+
+*** run the script "Serial_MA68II_45deg_1file.py" to measure 1 by 1 the spectral reflectance of the printed colors
+>>> the file "colornames ORDER ok.png" will help you to see what printed sample is associated with each serial number
+
+
+# 2 - measuring light
+
+- set up your wall / board in the dark room and illuminate it
+- in front of you wall / board, take a picture in RAW mode, make sure it's not over- / under-exposed
+- put as many precise marks as needed on it to know its measures, redo a photo
+- develop the picture in RAW mode, 16bit linear: dcraw is a good solution
+
+- straighten it to fit the proportions of your board, replace the surroundings by an average of all the pixel values
+> save as "MAP.tif", 16bit, greyscale, using only the green channel can be a good idea
+> make sure that the picture is smooth: no shadows, no little black dots, etc., you can try to blur it but not in Photoshop (blur filters convert it to 8bit!)
+
+- take a spectral measurement of your illuminant
+> place it in the file "illuminant.csv"
+> file structure is:    wavelength, measurement, \n
+> wavelength range: 400 - 700 in 10 nm increments
+
+
+# 3 - make colorimetry
+
+*** run the script "1illum_XYZ2006_csv_OK.py"
+>>> it will create a file named "XYZcolorlist.csv", containing a list of RGB's associated with their printed CIE XYZ colorimetric coordinates using your custom illuminant
+>>> file structure is: R G B, X, Y, Z
+
+*** run the script "XYZ_MapMAKER.py" to generate a file containing the CIE XYZ coordinates needed to make the board / wall uniform colorimetrically
+>>> a file "targets.csv" will be generated
+
+# 4 - compute 
+
+*** run the script "colors_text.py" to create the bitmap file "wall.ppm"
+>>> that's you file, print it and glue it on the wall!
+
+
+
+
+
+
+
+
+
+
