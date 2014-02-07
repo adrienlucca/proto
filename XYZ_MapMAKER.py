@@ -4,7 +4,7 @@ import csv
 """test algorithm to create the solution (a bitmap RGB file), 
 from an XYZ set of colors and a tiff MAP"""
 
-S = cv2.imread("MAP.tif", -1)
+S = cv2.imread("data/MAP.tif", -1)
 
 height, width = S.shape
 min_luminance = S.min()
@@ -19,7 +19,7 @@ print "min luminance is: " + str(min_luminance)
 
 # white is indexed as color num 314
 
-f = open('XYZcolorlist.csv')
+f = open('data/XYZcolorlist.csv')
 reader = csv.reader(f, delimiter = ',')
 
 COLORS = dict()
@@ -36,7 +36,7 @@ for name in COLORS.keys():
 
 print "reference white is XYZ : " + str(Ref_X) + ',' + str(Ref_Y) + ',' + str(Ref_Z)
 
-f = open('targets.csv', 'w')
+f = open('data/targets.csv', 'w')
 
 for x in range(width):
     for y in range(height):

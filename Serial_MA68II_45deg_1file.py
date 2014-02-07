@@ -7,7 +7,7 @@ Created on 28 janv. 2014
 import serial  # requires pyserial library
 import csv
 
-f     = open('colornames.csv', 'rb')
+f     = open('data/colornames.csv', 'rb')
 rgb_names = csv.reader(f, delimiter=',')
 
 ser  = serial.Serial(0)

@@ -7,18 +7,18 @@ import cv2
 S = 0
 
 
-img = cv2.imread("MAP.tif", -1)
+img = cv2.imread("data/MAP.tif", -1)
 height, width = img.shape
 
 accomplished = 0
 
-ppm = file("wall.ppm", 'w')
+ppm = file("data/wall.ppm", 'w')
 
 ppm.write("P3" + "\n" + str(width) + " " + str(height) + "\n" + "255" + "\n")
 # PPM file header
 
 all_colors = [(name, float(X), float(Y), float(Z))
-              for name, X, Y, Z in csv.reader(open('XYZcolorlist.csv'))]
+              for name, X, Y, Z in csv.reader(open('data/XYZcolorlist.csv'))]
 
 # background is marked SUPPORT
 support_i = [i for i, color in enumerate(all_colors) if color[0] == '255 255 255']
@@ -35,7 +35,7 @@ print ("thrown out: "
        + ", ".join(set(zip(*all_colors)[0]).difference(zip(*colors)[0])))
 
 targets = [(name, float(X), float(Y), float(Z), float(BG))
-           for name, X, Y, Z, BG in csv.reader(open('targets.csv'))]
+           for name, X, Y, Z, BG in csv.reader(open('data/targets.csv'))]
 
 for target in targets:
     PP = accomplished / (float(height)*float(width))

@@ -11,7 +11,7 @@ from pprint import pprint
 import random,csv
 
 all_colors = [(name, float(X), float(Y), float(Z))
-              for name, X, Y, Z in csv.reader(open('XYZcolorlist.csv'))]
+              for name, X, Y, Z in csv.reader(open('data/XYZcolorlist.csv'))]
 tg, hull_i = geometry.tetgen_of_hull([(X,Y,Z) for name, X, Y, Z in all_colors])
 colors = [all_colors[i] for i in hull_i]
 
