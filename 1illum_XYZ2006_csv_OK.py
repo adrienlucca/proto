@@ -7,7 +7,7 @@ import csv
 import color
 
 
-f = open('measurementsMA68II.csv')
+f = open('data/measurementsMA68II.csv')
 reader = csv.reader(f, delimiter = ',')
 spect_data = dict()
 
@@ -20,7 +20,7 @@ for row in reader:
 
 #print spect_data['1']['400']
 
-f = open('CMF_MA68II.csv')
+f = open('data/CMF_MA68II.csv')
 reader = csv.reader(f, delimiter = ',')
 cmf = dict()
     
@@ -31,7 +31,7 @@ for row in reader:
 
 
 
-f = open('illuminant.csv')
+f = open('data/illuminant.csv')
 reader = csv.reader(f, delimiter = ',')
 illuminant = dict()
     
@@ -39,7 +39,7 @@ for row in reader:
     illuminant[row[0]] = row[1]
     # file structure is: wavelength, amplitude
     
-f = open('colornames.csv')
+f = open('data/colornames.csv')
 reader = csv.reader(f, delimiter = ',')
 RGB = dict()
 
@@ -81,7 +81,7 @@ for name in spect_data.keys():
     # print c
     print c.r, c.g, c.b, c.x, c.y, c.z
     
-ofile = file('XYZcolorlist.csv', 'w')
+ofile = file('data/XYZcolorlist.csv', 'w')
 
 for name in XYZ.keys():
     ofile.write(str(RGB[name]['RED']) + ' ' + str(RGB[name]['GREEN']) + ' ' + str(RGB[name]['BLUE']) + ',' + str(XYZ[name]['X']) + ',' + str(XYZ[name]['Y']) + ',' + str(XYZ[name]['Z']) + '\n')
